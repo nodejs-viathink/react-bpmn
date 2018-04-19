@@ -5,17 +5,17 @@ export default ({ onUndo, onRedo, onSave }) => (
     <ul className="io-control-list io-horizontal">
       <li className="io-control">
         <button title="undo" onClick={onUndo}>
-          <img alt="undo" src={require("../style/image/undo.png")} width={22} />
+          <span className="icon-undo" />
         </button>
       </li>
       <li className="io-control">
         <button title="redo" onClick={onRedo}>
-          <img alt="redo" src={require("../style/image/redo.png")} width={22} />
+          <span className="icon-redo" />
         </button>
       </li>
       <li className="io-control">
         <button title="save" onClick={onSave}>
-          <img alt="save" src={require("../style/image/save.png")} width={22} />
+          <span className="icon-save" />
         </button>
       </li>
       {/* <li className="io-control">

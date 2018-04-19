@@ -13,6 +13,8 @@ import "./style/app.less";
 
 import xmlStr from "../../assets/bpmn/xmlStr";
 
+let scale = 1;
+
 export default class extends Component {
   componentDidMount() {
     document.body.className = "shown";
@@ -59,19 +61,51 @@ export default class extends Component {
     });
   };
 
-  // onChange = () => {
-  //   this.bpmnModeler.saveXML({ format: true }, function(err, xml) {
-  //     console.log(xml);
-  //   });
-  // };
-
   handleSave = (e) => {
-    e.preventDefault();
     this.bpmnModeler.saveXML({ format: true }, (err, xml) => {
       console.log(xml);
       console.log(this.bpmnModeler.getDefinitions());
     });
   }
+
+  handleRedo = () => {
+    this.bpmnModeler.get('commandStack').redo();
+  };
+
+  handleUndo = () => {
+    this.bpmnModeler.get('commandStack').undo();
+  };
+
+  handleZoom = () => {
+    this.bpmnModeler.get('canvas').zoom(scale);
+  }
+
+  handleZoomIn = () => {
+    scale += 0.1;
+    this.handleZoom();
+  };
+
+  handleZoomOut = () => {
+    if (scale <= 0.3) {
+      scale = 0.2
+    } else {
+      scale -= 0.1;
+    };
+    this.handleZoom();
+  };
+
+  handleZoomReset = () => {
+    scale = 1;
+    this.handleZoom();
+  };
+
+  handleOpen = () => {};
+
+  handleCreate = () => {};
+
+  handleSaveFile = () => {};
+
+  handleSaveImage = () => {};
 
   render() {
     return (
@@ -80,9 +114,22 @@ export default class extends Component {
           <div id="canvas" />
           <div id="properties-panel" />
         </div>
-        <ZoomControls />
-        <FileControls />
-        <EditingTools onSave={this.handleSave} />
+        <ZoomControls
+          onZoomIn={this.handleZoomIn}
+          onZoomOut={this.handleZoomOut}
+          onZoomReset={this.handleZoomReset}
+        />
+        <FileControls
+          onOpen={this.handleOpen}
+          onCreate={this.handleCreate}
+          onSaveFile={this.handleSaveFile}
+          onSaveImage={this.handleSaveImage}
+        />
+        <EditingTools
+          onSave={this.handleSave}
+          onRedo={this.handleRedo}
+          onUndo={this.handleUndo}
+        />
       </Fragment>
     );
   }
