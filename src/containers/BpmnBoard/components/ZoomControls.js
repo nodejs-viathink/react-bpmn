@@ -1,10 +1,10 @@
 import React from "react";
 
-export default () => (
-  <div className="io-zoom-controls">
+export default ({ zoomIn, zoomOut, zoomReset }) => (
+  <div className="io-zoom-controls" style={{ right: 300 }}>
     <ul className="io-zoom-reset io-control io-control-list">
       <li>
-        <button title="reset zoom" jsaction="click:bio.zoomReset">
+        <button title="reset zoom" onClick={zoomReset}>
           <span className="icon-size-reset" />
         </button>
       </li>
@@ -12,7 +12,7 @@ export default () => (
 
     <ul className="io-zoom io-control io-control-list">
       <li>
-        <button title="zoom in" jsaction="click:bio.zoomIn">
+        <button title="zoom in" onClick={zoomIn}>
           <span className="icon-plus" />
         </button>
       </li>
@@ -20,7 +20,7 @@ export default () => (
         <hr />
       </li>
       <li>
-        <button href="" title="zoom out" jsaction="click:bio.zoomOut">
+        <button href="" title="zoom out" onClick={zoomOut}>
           <span className="icon-minus" />
         </button>
       </li>

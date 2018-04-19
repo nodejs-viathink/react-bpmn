@@ -7,6 +7,7 @@ import magicModdleDescriptor from "./descriptors/magic";
 
 import ZoomControls from "./components/ZoomControls";
 import FileControls from "./components/FileControls";
+import EditingTools from './components/EditingTools';
 
 import "./style/app.less";
 
@@ -20,7 +21,7 @@ export default class extends Component {
       additionalModules: [propertiesPanelModule, propertiesProviderModule],
       container: "#canvas",
       propertiesPanel: {
-        parent: "#properties"
+        parent: "#properties-panel"
       },
       moddleExtensions: {
         magic: magicModdleDescriptor
@@ -52,6 +53,7 @@ export default class extends Component {
         console.log("error rendering", err);
       } else {
         // we did well!
+        this.bpmnModeler.getDefinitions()
         console.log("successfully rendered");
       }
     });
@@ -65,20 +67,22 @@ export default class extends Component {
 
   handleSave = (e) => {
     e.preventDefault();
-    this.bpmnModeler.saveXML({ format: true }, function(err, xml) {
+    this.bpmnModeler.saveXML({ format: true }, (err, xml) => {
       console.log(xml);
+      console.log(this.bpmnModeler.getDefinitions());
     });
   }
 
   render() {
     return (
       <Fragment>
-        <div className="content modeler" id="js-drop-zone">
+        <div className="content">
           <div id="canvas" />
-          <div id="properties" />
+          <div id="properties-panel" />
         </div>
         <ZoomControls />
-        <FileControls onSave={this.handleSave} />
+        <FileControls />
+        <EditingTools onSave={this.handleSave} />
       </Fragment>
     );
   }

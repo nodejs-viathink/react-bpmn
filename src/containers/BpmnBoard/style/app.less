@@ -2,6 +2,24 @@
 @import "../../../../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
 @import "../../../../node_modules/bpmn-js-properties-panel/styles/properties.less";
 
+#properties-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 260px;
+  z-index: 10;
+  border-left: 1px solid #ccc;
+  overflow: auto;
+  &:empty {
+    display: none;
+  }
+  > .djs-properties-panel {
+    padding-bottom: 70px;
+    min-height:100%;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,6 +44,9 @@ h2 {
 }
 ul {
   padding-left: 30px;
+}
+#root {
+  height: 100%;
 }
 @font-face {
   font-family: "app";
