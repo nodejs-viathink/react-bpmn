@@ -11,11 +11,21 @@ export default function(group, element) {
   // element is a start event.
 
   if (is(element, 'bpmn:StartEvent')) {
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.selectBox({
       id : 'spell',
       description : 'Apply a black magic spell',
       label : 'Spell',
-      modelProperty : 'spell'
+      modelProperty : 'spell',
+      selectOptions: [{
+        name: 'one',
+        value: 1
+      }, {
+        name: 'two',
+        value: 2
+      }, {
+        name: 'three',
+        value: 3
+      }]
     }));
   }
 }
